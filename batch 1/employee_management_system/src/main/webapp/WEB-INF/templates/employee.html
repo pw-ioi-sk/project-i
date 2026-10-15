@@ -12,6 +12,7 @@
                 <th>Name</th>
                 <th>Dept</th>
                 <th>Salary</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +21,12 @@
                 <td th:text="${employee.name}"></td>
                 <td th:text="${employee.dept}"></td>
                 <td th:text="${employee.salary}"></td>
+                <td>
+                    <form method="post" th:action="@{/employee/delete}">
+                        <input type="hidden" name="id" th:value="${employee.id}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>
