@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.util.HibernateUtil;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
+import org.thymeleaf.messageresolver.StandardMessageResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.WebApplicationTemplateResolver;
 import org.thymeleaf.web.IWebExchange;
@@ -33,6 +34,8 @@ public class ThymeleafConfig implements ServletContextListener {
 
         templateEngine = new TemplateEngine();
         templateEngine.setTemplateResolver(resolver);
+        templateEngine.setMessageResolver(new StandardMessageResolver());
+
 
         HibernateUtil.getSessionFactory();
     }
