@@ -30,5 +30,7 @@ public class EmployeeListServlet extends HttpServlet {
                 res,
                 Map.of("employees", employees),
                 "employee");
+
+        // /employee/add
     }
 }

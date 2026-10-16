@@ -63,7 +63,8 @@
 </head>
 <body>
 <h1>Employee List</h1>
-<table th:unless="${#{lists.isEmpty(employees)}}">
+<a th:href="@{/employee/add}">Add</a>
+<table>
     <thead>
     <tr>
         <th>ID</th>
@@ -88,6 +89,5 @@
     </tr>
     </tbody>
 </table>
-<h1 th:if="${#{lists.isEmpty(employees)}}">NO EMPLOYEE RECORD FOUND</h1>
 </body>
 </html>
