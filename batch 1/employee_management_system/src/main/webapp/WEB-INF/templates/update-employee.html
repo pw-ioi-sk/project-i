@@ -3,21 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <title>Employee Update</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.12);
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --success: #22c55e;
+            --success-hover: #16a34a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f172a, #111827, #1e293b);
+            color: var(--text);
+            padding: 24px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 520px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(14px);
+            border-radius: 18px;
+            padding: 32px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
+        }
+
+        h2 {
+            margin: 0 0 24px;
+            text-align: center;
+            font-size: 2rem;
+            color: #ffffff;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 10px;
+            background: rgba(15, 23, 42, 0.75);
+            color: white;
+            outline: none;
+            transition: 0.25s ease;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
+        }
+
+        button, a {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.25s ease;
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--success), #15803d);
+            color: white;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, var(--success-hover), #166534);
+            transform: translateY(-1px);
+        }
+
+        a {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text);
+        }
+
+        a:hover {
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .field {
+            margin-bottom: 4px;
+        }
+
+        .id-display {
+            text-align: center;
+            margin-bottom: 18px;
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+    </style>
 </head>
 <body>
+<div class="container">
     <h2 th:text="${employee.id}">Id</h2>
+
     <form method="post" th:action="@{/employee/saveas}" th:object="${employee}">
-        <label for="name">Name</label>
-        <input id="name" type="text" name="name" th:value="*{name}">
-        <br>
-        <label for="dept">dept</label>
-        <input id="dept" type="text" name="dept" th:value="*{dept}">
-        <br>
-        <label for="salary">Name</label>
-        <input id="salary" type="number" name="salary" th:value="*{salary}">
-        <br>
-        <button type="submit">Update</button>
-        <a th:href="@{/employees}">Cancel</a>
+        <input id="id" type="hidden" name="id" th:value="*{id}">
+
+        <div class="field">
+            <label for="name">Name</label>
+            <input id="name" type="text" name="name" th:value="*{name}">
+        </div>
+
+        <div class="field">
+            <label for="dept">Dept</label>
+            <input id="dept" type="text" name="dept" th:value="*{dept}">
+        </div>
+
+        <div class="field">
+            <label for="salary">Salary</label>
+            <input id="salary" type="number" name="salary" th:value="*{salary}">
+        </div>
+
+        <div class="actions">
+            <button type="submit">Update</button>
+            <a th:href="@{/employees}">Cancel</a>
+        </div>
     </form>
+</div>
 </body>
 </html>

@@ -11,7 +11,7 @@ import org.example.modal.Employee;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet("/employee/add")
+@WebServlet(urlPatterns = {"/employee/add", "/employee/update"})
 public class EmployeeFormServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req,

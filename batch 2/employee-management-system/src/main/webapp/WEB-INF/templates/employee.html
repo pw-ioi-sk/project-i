@@ -85,6 +85,7 @@
                 <input type="hidden" name="id" th:value="${employee.id}">
                 <button type="submit">Delete</button>
             </form>
+            <a th:href="@{/employee/update(id=${employee.id})}">Update</a>
         </td>
     </tr>
     </tbody>
