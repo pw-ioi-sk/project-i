@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.config.ThymeleafConfig;
+import org.example.dao.EmployeeDAO;
 import org.example.modal.Employee;
 
 import java.io.IOException;
@@ -13,14 +14,35 @@ import java.util.Map;
 
 @WebServlet(urlPatterns = {"/employee/add", "/employee/update"})
 public class EmployeeFormServlet extends HttpServlet {
+
+    private final EmployeeDAO employeeDAO = new EmployeeDAO();
+
     @Override
     protected void doGet(HttpServletRequest req,
                          HttpServletResponse res)
             throws ServletException, IOException {
+        if (req.getServletPath().equals("/employee/add")) {
+            ThymeleafConfig.render(
+                    req,
+                    res,
+                    Map.of("employee", new Employee()),
+                    "add-new-employee");
+            return;
+        }
+
+        Long id = Long.parseLong(req.getParameter("id"));
+
+        Employee employee = employeeDAO.findById(id);
+
+        if (employee == null) {
+            res.sendError(HttpServletResponse.SC_NOT_FOUND, "EMPLOYEE NOT FOUND!");
+            return;
+        }
+
         ThymeleafConfig.render(
                 req,
                 res,
-                Map.of("employee", new Employee()),
-                "add-new-employee");
+                Map.of("employee", employee),
+                "update-employee");
     }
 }

@@ -3,20 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Employee</title>
+    <style>
+        :root {
+            --bg: #f4f7fb;
+            --card: #ffffff;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --line: #dbe3ee;
+            --accent: #2563eb;
+            --accent-dark: #1d4ed8;
+            --cancel: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #e8eef7 0%, #f8fafc 100%);
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text);
+        }
+
+        form {
+            width: min(100%, 440px);
+            background: var(--card);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        label {
+            display: block;
+            margin: 14px 0 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: #fafcff;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.2s ease;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+            background: #fff;
+        }
+
+        button,
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.2s ease;
+        }
+
+        button {
+            border: none;
+            background: var(--accent);
+            color: #fff;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background: var(--accent-dark);
+            transform: translateY(-1px);
+        }
+
+        a {
+            background: var(--cancel);
+            color: var(--text);
+        }
+
+        a:hover {
+            background: #d1d5db;
+        }
+
+        br {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <form method="post" th:action="@{/employee/save}">
-        <label for="name">Name</label>
-        <input id="name" type="text" name="name" required>
-        <br>
-        <label for="branch">Branch</label>
-        <input id="branch" type="text" name="branch" required>
-        <br>
-        <label for="salary">Salary</label>
-        <input id="salary" type="number" name="salary" required>
-        <br>
-        <button type="submit">Add</button>
-        <a th:href="@{/employees}">Cancel</a>
-    </form>
+<form method="post" th:action="@{/employee/save}">
+    <label for="name">Name</label>
+    <input id="name" type="text" name="name" required>
+
+    <label for="branch">Branch</label>
+    <input id="branch" type="text" name="branch" required>
+
+    <label for="salary">Salary</label>
+    <input id="salary" type="number" name="salary" required>
+
+    <button type="submit">Add</button>
+    <a th:href="@{/employees}">Cancel</a>
+</form>
 </body>
 </html>

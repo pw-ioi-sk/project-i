@@ -2,68 +2,143 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Employee List</title>
     <style>
+        :root {
+            --bg: #f4f7fb;
+            --card: #ffffff;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --line: #dbe3ee;
+            --accent: #2563eb;
+            --accent-dark: #1d4ed8;
+            --danger: #dc3545;
+            --danger-dark: #c82333;
+            --cancel: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background: #f8f9fa;
-            color: #333;
+            margin: 0;
+            min-height: 100vh;
+            padding: 32px;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #e8eef7 0%, #f8fafc 100%);
+            color: var(--text);
         }
 
         h1 {
+            margin: 0 0 18px;
             text-align: center;
-            margin-bottom: 20px;
+            font-size: 2rem;
+            letter-spacing: 0.3px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 16px;
+        }
+
+        .add-btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 10px;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .add-btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-1px);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            background: #fff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: var(--card);
+            border-radius: 16px;
             overflow: hidden;
+            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.7);
         }
 
         th, td {
-            border: 1px solid #ddd;
-            padding: 12px 15px;
+            padding: 14px 16px;
             text-align: left;
+            border-bottom: 1px solid var(--line);
         }
 
         th {
-            background: #007bff;
-            color: #fff;
+            background: #eff6ff;
+            color: #1e3a8a;
+            font-weight: 700;
         }
 
-        tr:nth-child(even) {
-            background: #f2f2f2;
+        tr:hover td {
+            background: #f8fbff;
         }
 
-        tr:hover {
-            background: #e9f5ff;
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        td:last-child {
+            white-space: nowrap;
         }
 
         form {
+            display: inline;
             margin: 0;
         }
 
-        button {
-            background: #dc3545;
-            color: white;
+        button,
+        .update-btn {
+            display: inline-block;
+            padding: 9px 14px;
             border: none;
-            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
             cursor: pointer;
-            border-radius: 4px;
+            transition: 0.2s ease;
+        }
+
+        button {
+            background: var(--danger);
+            color: #fff;
         }
 
         button:hover {
-            background: #c82333;
+            background: var(--danger-dark);
+            transform: translateY(-1px);
+        }
+
+        .update-btn {
+            margin-left: 8px;
+            background: var(--cancel);
+            color: var(--text);
+        }
+
+        .update-btn:hover {
+            background: #d1d5db;
         }
     </style>
 </head>
 <body>
 <h1>Employee List</h1>
-<a th:href="@{/employee/add}">Add</a>
+
+<div class="topbar">
+    <a class="add-btn" th:href="@{/employee/add}">Add Employee</a>
+</div>
+
 <table>
     <thead>
     <tr>
@@ -85,7 +160,7 @@
                 <input type="hidden" name="id" th:value="${employee.id}">
                 <button type="submit">Delete</button>
             </form>
-            <a th:href="@{/employee/update(id=${employee.id})}">Update</a>
+            <a class="update-btn" th:href="@{/employee/update(id=${employee.id})}">Update</a>
         </td>
     </tr>
     </tbody>
